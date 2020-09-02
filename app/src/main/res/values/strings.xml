@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">SAV SAMSUNG</string>
+    <string name="nav_home">Aide en ligne</string>
+    <string name="nav_services">Aide et réparation</string>
+    <string name="nav_store">boutique</string>
+    <string name="nav_reclamation">gestion de reclamations</string>
+    <string name="nav_profil">profil</string>
+    <string name="nav_logout">logout</string>
+    <string name="remote_api_adr_phone">10.0.2.2</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

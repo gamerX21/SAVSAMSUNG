@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 03 sep. 2020 à 01:45
+-- Généré le :  Dim 06 sep. 2020 à 05:00
 -- Version du serveur :  10.1.36-MariaDB
 -- Version de PHP :  7.2.11
 
@@ -76,8 +76,8 @@ INSERT INTO `astuces` (`id`, `article_id`, `description`) VALUES
 CREATE TABLE `commandes` (
   `id` int(255) NOT NULL,
   `ref` int(255) NOT NULL,
-  `user_id` int(255) NOT NULL,
-  `produit_id` int(255) NOT NULL,
+  `user_id` int(255) DEFAULT NULL,
+  `produit_id` int(255) DEFAULT NULL,
   `quantité` int(255) NOT NULL,
   `dataA` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
@@ -87,8 +87,7 @@ CREATE TABLE `commandes` (
 --
 
 INSERT INTO `commandes` (`id`, `ref`, `user_id`, `produit_id`, `quantité`, `dataA`) VALUES
-(1, 5989, 1, 4, 0, '2020-09-02'),
-(2, 4104, 1, 2, 2, '2020-09-02');
+(1, 9269, 1, 1, 2, '2020-09-06');
 
 -- --------------------------------------------------------
 
@@ -164,7 +163,9 @@ CREATE TABLE `repairdemand` (
 --
 
 INSERT INTO `repairdemand` (`id`, `user_id`, `type`, `phone`, `ville`, `adresse`, `generated_num`, `status`, `dataA`) VALUES
-(1, 1, 'Lave-Séche', 7, 'ben arous', 'sdf', 3889, 'en cours', '2020-08-31');
+(1, 1, 'Lave-Séche', 7, 'ben arous', 'sdf', 3889, 'en cours', '2020-08-31'),
+(2, 1, 'Lave-Séche', 58, 'ben arous', 'qSDQSD', 4441, 'en cours', '2020-09-05'),
+(3, 1, 'Lave-Séche', 554, 'ben arous', 'azeaze', 2254, 'en cours', '2020-09-06');
 
 -- --------------------------------------------------------
 
@@ -212,7 +213,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `unique_id`, `fullname`, `email`, `password`, `salt`, `adresse`, `tel`, `created_at`, `updated_at`) VALUES
-(1, '58590ddc-3ff4-40b1-9a6a-5d82cd76caa3', 'kraoua houssem', 'houssem.kr', '33fcbcc9c838c52858945dcf4a3f2fd009b8d364e8d5e6c4ac390413f55f9017d42a8a3c0f60fc7255c49f0a1b0e69e3dfc0819ee04a90bc1b05166729de8873', '3b96e55d6343f954', 'zaghouan bassatine', 55437408, '2020-08-31', '2020-08-31');
+(1, '58590ddc-3ff4-40b1-9a6a-5d82cd76caa3', 'kraoua houssem', 'houssem.kraoua', '33fcbcc9c838c52858945dcf4a3f2fd009b8d364e8d5e6c4ac390413f55f9017d42a8a3c0f60fc7255c49f0a1b0e69e3dfc0819ee04a90bc1b05166729de8873', '3b96e55d6343f954', 'zaghouan bassatine', 55437408, '2020-08-31', '2020-08-31'),
+(2, '9569c350-c73a-4ced-a8d3-97cbf5edd4db', 'test test', 'hou.kr', '3ae1d99126fdc4de4ea1a69a285c787abb338efad516cafa7425465bf5a6703173b38e9ce967764cefc7a0c288dd06e7c935e0b87d563483a0a639f30a3fb293', '310a897a4c27b7c0', 'zaghouan', 99, '2020-09-06', '2020-09-06');
 
 --
 -- Index pour les tables déchargées
@@ -290,7 +292,7 @@ ALTER TABLE `astuces`
 -- AUTO_INCREMENT pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `helps`
@@ -308,7 +310,7 @@ ALTER TABLE `produits`
 -- AUTO_INCREMENT pour la table `repairdemand`
 --
 ALTER TABLE `repairdemand`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `services`
@@ -320,7 +322,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
@@ -336,8 +338,8 @@ ALTER TABLE `astuces`
 -- Contraintes pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  ADD CONSTRAINT `commandes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `commandes_ibfk_2` FOREIGN KEY (`produit_id`) REFERENCES `produits` (`id`);
+  ADD CONSTRAINT `commandes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `commandes_ibfk_2` FOREIGN KEY (`produit_id`) REFERENCES `produits` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

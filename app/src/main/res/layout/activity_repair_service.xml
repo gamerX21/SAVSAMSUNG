@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".activities.service.RepairServiceActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/baumans"
+            android:text="Menu Réparation"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="25sp"></TextView>
+    </RelativeLayout>
+
+    <GridLayout
+        android:columnCount="2"
+        android:rowCount="2"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false"
+        android:layout_weight="6"
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="10dp">
+
+        <!---row 1 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/repairD"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="#fff"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="8dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal|center_vertical">
+                 <ImageView
+                     android:layout_width="70dp"
+                     android:layout_height="70dp"
+                     android:src="@drawable/add"
+                     android:layout_gravity="center_horizontal"></ImageView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorSecondary"
+                    android:fontFamily="@font/baumans"
+                    android:textSize="18sp"
+                    android:text="Demande de Réparation"></TextView>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <!---row 1 -->
+        <!---row 2 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/GarantieD"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="#fff"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="8dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal|center_vertical">
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/survey"
+                    android:layout_gravity="center_horizontal"></ImageView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorSecondary"
+                    android:fontFamily="@font/baumans"
+                    android:textSize="18sp"
+                    android:text="Garantie et Extension de garantie"></TextView>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <!---row 2 -->
+        <!---row 3 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ListRepaidD"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="#fff"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="8dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal|center_vertical">
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/listre"
+                    android:layout_gravity="center_horizontal"></ImageView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorSecondary"
+                    android:fontFamily="@font/baumans"
+                    android:textSize="18sp"
+                    android:text="suivre votre demande de réparation"></TextView>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <!---row 3 -->
+    </GridLayout>
+</LinearLayout>

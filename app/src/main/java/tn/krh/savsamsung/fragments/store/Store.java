@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 
 import tn.krh.savsamsung.R;
 import tn.krh.savsamsung.fragments.produits.accessoires;
@@ -20,10 +21,13 @@ import tn.krh.savsamsung.fragments.produits.prd_nettoyage;
  */
 public class Store extends Fragment {
 
-    FrameLayout partsFL,accFL,nettoyageFL;
+    FrameLayout partsFL,accFL,nettoyageFL,StoreFrameLayout;
+    ImageButton ShoppingCartBtn,listStoreBtn;
     accessoires accFrag;
     electro_parts electroPartsFrag;
     prd_nettoyage nettoyageFrag;
+    ShoppingCart shoppingCart;
+    Store store;
     public Store() {
         // Required empty public constructor
     }
@@ -38,6 +42,11 @@ public class Store extends Fragment {
         accFrag = new accessoires();
         electroPartsFrag = new electro_parts();
         nettoyageFrag = new prd_nettoyage();
+        shoppingCart = new ShoppingCart();
+        store = new Store();
+        //set Buttons
+        ShoppingCartBtn = view.findViewById(R.id.ShoppingCartBtn);
+        listStoreBtn = view.findViewById(R.id.listStoreBtn);
         //set fragments to frame layout to load RV data 1
         getFragmentManager()
                 .beginTransaction()
@@ -50,6 +59,26 @@ public class Store extends Fragment {
         getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.AccesoirsFrag, accFrag).commit();
+        //set shopping cart action button
+        ShoppingCartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.StoreFrameLayout, shoppingCart).commit();
+            }
+        });
+        /*
+        listStoreBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.StoreFrameLayout, store).commit();
+            }
+        });
+
+         */
         return view;
     }
 }

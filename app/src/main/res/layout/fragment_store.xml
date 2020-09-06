@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#fff"
     tools:context=".fragments.store.Store">
 
     <LinearLayout
@@ -24,20 +25,24 @@
             android:src="@drawable/listcc" />
 
         <ImageButton
-            android:id="@+id/CmdStoreBtn"
+            android:id="@+id/ShoppingCartBtn"
             android:layout_width="20dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/custom_btn_creative"
             android:src="@drawable/order" />
     </LinearLayout>
-
+    <FrameLayout
+        android:id="@+id/StoreFrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
+
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
@@ -162,5 +167,6 @@
         </LinearLayout>
 
     </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

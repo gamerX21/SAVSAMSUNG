@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="550dp"
         android:layout_margin="30dp"
         app:cardCornerRadius="20dp">
         <LinearLayout
@@ -89,19 +89,11 @@
                     android:textSize="18sp"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"></TextView>
-                <EditText
-                    android:id="@+id/quantiteCMD"
-                    android:layout_marginRight="15dp"
+                <NumberPicker
+                    android:id="@+id/QuantiteNumberPicker"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/custom_btn_creative"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/baumans"
-                    android:textColor="@color/cardview_main"
-                    android:textColorHint="@color/cardview_main"
-                    android:textAlignment="center"
-                    android:hint="1"
-                    android:inputType="number"></EditText>
+                    android:background="@drawable/custom_btn_creative"></NumberPicker>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="20dp"
@@ -148,6 +140,18 @@
                 android:text="confirmer commande"
                 android:fontFamily="@font/baumans"
                 android:textColor="#fff"></Button>
+            <Button
+                android:id="@+id/AddItemToShoppingCartBtn"
+                android:layout_marginTop="50dp"
+                android:textAllCaps="false"
+                android:layout_width="240dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:background="@drawable/custom_btn_creative"
+                android:text="ajouter dans la carte"
+                android:fontFamily="@font/baumans"
+                android:textColor="@color/cardview_main"></Button>
 
         </LinearLayout>
 

@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -20,6 +21,7 @@ import tn.krh.savsamsung.fragments.store.Store;
 import tn.krh.savsamsung.fragments.help.fragment_help_items_list;
 
 public class MainActivity extends AppCompatActivity {
+    private long backPressedTime;
     private BottomNavigationView MainBottomNavMenu;
     private FrameLayout FrameLayoutSAV;
     private Service_fragment service_fragment;
@@ -70,6 +72,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        if(backPressedTime + 2000 > System.currentTimeMillis()){
+            super.onBackPressed();
+            return;
+        }else {
+            Toast.makeText(getApplication(),"appuyer 2 fois pour fermer l'application",Toast.LENGTH_LONG).show();
+        }
+        backPressedTime = System.currentTimeMillis();
+    }
+
     public void setFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()

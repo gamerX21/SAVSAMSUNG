@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,17 +26,21 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import tn.krh.savsamsung.R;
 import tn.krh.savsamsung.activities.profile.ProfileActivity;
+import tn.krh.savsamsung.database.AppDataBase;
 import tn.krh.savsamsung.entity.produit;
+import tn.krh.savsamsung.entity.shoppingCart;
 import tn.krh.savsamsung.entity.user;
 import tn.krh.savsamsung.retrofit.INodeJS;
 import tn.krh.savsamsung.retrofit.RetroClient;
 
 public class Commande extends AppCompatActivity {
     TextView refCmd,NomProduit,PrixProduit,PrixTT;
-    EditText quanCmd;
-    Button ConfirmerCmdBtn;
+    Button ConfirmerCmdBtn,AddItemToShoppingCartBtn;
+    NumberPicker QuantiteNumberPicker;
     private SharedPreferences mPreference;
     public static final String sharedPrefFile = "com.krh.app";
+    private AppDataBase database;
+
     Context mContext;
     INodeJS myApi;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -46,9 +51,10 @@ public class Commande extends AppCompatActivity {
         refCmd = findViewById(R.id.CommandeRef);
         NomProduit = findViewById(R.id.NOMProduitCMD);
         PrixProduit = findViewById(R.id.PrixProduitCMD);
-        quanCmd = findViewById(R.id.quantiteCMD);
+        QuantiteNumberPicker = findViewById(R.id.QuantiteNumberPicker);
         PrixTT = findViewById(R.id.PrixQuanCMD);
         ConfirmerCmdBtn = findViewById(R.id.ConfirmerCMDBtn);
+        AddItemToShoppingCartBtn = findViewById(R.id.AddItemToShoppingCartBtn);
         //set RANDOM REF for CMD
         Random random = new Random();
         int max = 10000;
@@ -59,26 +65,47 @@ public class Commande extends AppCompatActivity {
         mPreference = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
         int produit_id = mPreference.getInt("ProduitId",0);
         int user_id = mPreference.getInt("IdUser",0);
+        //set commande data from store clicked item
         setCommandeData(produit_id);
         int prixPrd = mPreference.getInt("prixPrd",0);
         PrixTT.setText(prixPrd + "DT");
         int quan = 0;
-        quanCmd.setOnClickListener(new View.OnClickListener() {
+        QuantiteNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
-            public void onClick(View v) {
-                int quan = Integer.parseInt(quanCmd.getText().toString());
-                int TT = quan * prixPrd ;
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                int TT = newVal * prixPrd ;
                 String prixS = String.valueOf(TT);
                 PrixTT.setText(prixS + "DT");
             }
         });
+
+        AddItemToShoppingCartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int TT = (QuantiteNumberPicker.getValue() * prixPrd);
+
+                AddToCart(user_id,produit_id,QuantiteNumberPicker.getValue(),TT);
+            }
+        });
+
+
+
         ConfirmerCmdBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddNewCommand(generated_num,user_id,produit_id,Integer.parseInt(quanCmd.getText().toString()));
+                AddNewCommand(generated_num,user_id,produit_id,QuantiteNumberPicker.getValue());
             }
         });
+
     }
+
+    private void AddToCart(int user_id, int produit_id, int quan,int TT) {
+        database = AppDataBase.getAppDatabase(this);
+        shoppingCart shoppingItem = new shoppingCart(user_id,produit_id,quan,TT);
+        database.userDao().insertUserShoppingCartItem(shoppingItem);
+        Toast.makeText(this,"produit ajoutée avec succés",Toast.LENGTH_SHORT).show();
+    }
+
     private void AddNewCommand(int ref,int user_id,int produit_id,int quan)
     {
         Retrofit retrofit = RetroClient.getInstance();
@@ -109,6 +136,8 @@ public class Commande extends AppCompatActivity {
                 NomProduit.setText(prd.getNom());
                 String prixC = String.valueOf(prd.getPrix());
                 PrixProduit.setText(prixC + " DT");
+                QuantiteNumberPicker.setMinValue(1);
+                QuantiteNumberPicker.setMaxValue(prd.getStock()-1);
                 SharedPreferences.Editor editor = mPreference.edit();
                 editor.putInt("prixPrd",prd.getPrix());
                 editor.apply();

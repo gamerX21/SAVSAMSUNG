@@ -55,10 +55,10 @@ public class SignInFrag extends Fragment  {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
-        email = view.findViewById(R.id.emailSignUp);
-        password = view.findViewById(R.id.pwdSignIn);
-        SignUpBtn = view.findViewById(R.id.SignUpBtn);
-        SignInNrml = view.findViewById(R.id.SignInNrmlBtn);
+            email = view.findViewById(R.id.emailSignUp);
+            password = view.findViewById(R.id.pwdSignIn);
+            SignUpBtn = view.findViewById(R.id.SignUpBtn);
+            SignInNrml = view.findViewById(R.id.SignInNrmlBtn);
 
          /*
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
@@ -75,24 +75,25 @@ public class SignInFrag extends Fragment  {
         });
 
          */
-        Retrofit retrofit = RetroClient.getInstance();
-        myApi = retrofit.create(INodeJS.class);
-        SignUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), SignUp.class));
-            }
-        });
-        SignInNrml.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(email.getText().toString().equals("") || password.getText().toString().equals("")){
-                    Toast.makeText(getContext(),"vérifier vos informations svp",Toast.LENGTH_SHORT).show();
+            Retrofit retrofit = RetroClient.getInstance();
+            myApi = retrofit.create(INodeJS.class);
+            SignUpBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getContext(), SignUp.class));
                 }
-                else
-                    loginUser(email.getText().toString(),password.getText().toString());
-            }
-        });
+            });
+            SignInNrml.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(email.getText().toString().equals("") || password.getText().toString().equals("")){
+                        Toast.makeText(getContext(),"vérifier vos informations svp",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                        loginUser(email.getText().toString(),password.getText().toString());
+                }
+            });
+
         return view;
     }
     private void loginUser(String email, String password) {

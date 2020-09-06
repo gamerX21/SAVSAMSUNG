@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.commande.Commande"></activity>
+        <activity android:name=".activities.commande.ConfirmShopping"></activity>
+        <activity android:name=".activities.commande.Commande" />
         <activity
             android:name=".activities.store.DetailsStoreItem"
             android:theme="@style/AppTheme.NoActionBar" />

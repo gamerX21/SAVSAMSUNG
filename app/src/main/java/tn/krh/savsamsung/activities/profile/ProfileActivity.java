@@ -24,6 +24,7 @@ import tn.krh.savsamsung.entity.user;
 import tn.krh.savsamsung.retrofit.INodeJS;
 
 public class ProfileActivity extends AppCompatActivity  {
+    private long backPressedTime;
     private SharedPreferences mPreference;
     public static final String sharedPrefFile = "com.krh.app";
     Context mContext;
@@ -78,7 +79,7 @@ public class ProfileActivity extends AppCompatActivity  {
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
         myApi = retrofit.create(INodeJS.class);
-        Call<user> call = myApi.getUserDataByEmail("houssem.kr");
+        Call<user> call = myApi.getUserDataByEmail(user_email);
         call.enqueue(new Callback<user>() {
             @Override
             public void onResponse(Call<user> call, Response<user> response) {
@@ -99,6 +100,17 @@ public class ProfileActivity extends AppCompatActivity  {
             }
         });
 
+    }
+    @Override
+    public void onBackPressed() {
+        if(backPressedTime + 2000 > System.currentTimeMillis()){
+            super.onBackPressed();
+            startActivity(new Intent(ProfileActivity.this,MainActivity.class));
+            return;
+        }else {
+            Toast.makeText(getApplication(),"appuyer 2 fois",Toast.LENGTH_LONG).show();
+        }
+        backPressedTime = System.currentTimeMillis();
     }
     /*
     private void handleSignInResult(GoogleSignInResult result){
